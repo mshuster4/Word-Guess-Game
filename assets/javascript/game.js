@@ -1,6 +1,4 @@
-//"Press any key to get started!"
-// Listen to what letter user will type
-//Create list of 10 types of words the computer will randomly choose from
+
 //Display word with "_ _ _ _" equal to the amount of letters in each word
 //If user guesses letter correctly, their letter is display
 //If user guess incorrectly, letter is displayed  under "letters already guessed"
@@ -12,8 +10,9 @@
 
 var wins = 0;
 var losses = 0;
-var guessesLeft = 9; 
+var guessesLeft = 10; 
 var lettersGuessed = [];
+var hiddenWord = []; 
 
 var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
@@ -30,10 +29,25 @@ var wineList =
 'merlot',
 ];
 
-document.onkeyup = function(event) {
+var currentWord = wineList[Math.floor(Math.random() * wineList.length)];
 
-  var userGuess = console.log(event.key);
+function hideWord(currentWord)
 
-  var computerGuess = console.log(wineList[Math.floor(Math.random() * wineList.length)]);
-  
+document.onkeydown = function(event) {
+
+    var userGuess = event.key;
+
+    var currentWord = wineList[Math.floor(Math.random() * wineList.length)];
+
+    console.log(currentWord); 
+
+
+    if (letters.indexOf(userGuess) > -1) {
+        for (var i = 0;  i < currentWord.length; i ++) {
+                hiddenWord.push('_');
+                document.getElementById("word-to-guess").innerHTML = hiddenWord.join(' ');  
+            }
+            
+        }
+    }
 }
