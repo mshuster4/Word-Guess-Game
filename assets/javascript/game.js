@@ -28,46 +28,39 @@ var wineList =
 ];
 
 
-function hideWord() {
+function gamePlay() {
 
     var currentWord = wineList[Math.floor(Math.random() * wineList.length)];
+    
+    document.onkeydown = function(event) {
 
-    console.log(currentWord);
+        console.log(currentWord);
 
-    var hiddenWord = [];
+        var hiddenWord = [];
 
-    for (var i = 0; i < currentWord.length; i++) {
+        for (var i = 0; i < currentWord.length; i++) {
 
-        if (currentWord.charAt(i) == ' ') {
+            if (currentWord.charAt(i) == ' ') {
             
-            hiddenWord[i] = ' '
-        }
+                hiddenWord[i] = ' ';
 
-        else {
+            }
 
-            hiddenWord[i] = '_';
+            else {
+
+                hiddenWord[i] = '_';
+
+                }
+
+            document.getElementById("word-to-guess").innerHTML = hiddenWord;
 
         }
 
     }
 
-    console.log(hiddenWord)
+};
 
-    return hiddenWord;
-
-}
-
-
-
-document.onkeyup = function(event) {
-
-    hideWord();
-
-    var userGuess = event.key; 
-
-    console.log(event.key)
-
-}; 
+gamePlay()
 
 
 
