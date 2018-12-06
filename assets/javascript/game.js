@@ -27,11 +27,12 @@ var wineList =
 'merlot',
 ];
 
-document.onkeyup = function(event) {
+
+function hideWord() {
 
     var currentWord = wineList[Math.floor(Math.random() * wineList.length)];
 
-    console.log(currentWord); 
+    console.log(currentWord);
 
     var hiddenWord = [];
 
@@ -44,14 +45,29 @@ document.onkeyup = function(event) {
 
         else {
 
-            hiddenWord[i] = "_";
+            hiddenWord[i] = '_';
 
         }
 
     }
 
-    console.log(hiddenWord); 
+    console.log(hiddenWord)
+
+    return hiddenWord;
+
 }
+
+
+
+document.onkeyup = function(event) {
+
+    hideWord();
+
+    var userGuess = event.key; 
+
+    console.log(event.key)
+
+}; 
 
 
 
