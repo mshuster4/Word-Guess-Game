@@ -11,8 +11,6 @@
 var wins = 0;
 var losses = 0;
 var guessesLeft = 10; 
-var lettersGuessed = [];
-var hiddenWord = []; 
 
 var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
@@ -24,30 +22,39 @@ var wineList =
 'gewuertztraminer',
 'syrah',
 'cabernet sauvignon',
-'zinfandel',
+'zinfandel', 
 'pinot noir',
 'merlot',
 ];
 
-var currentWord = wineList[Math.floor(Math.random() * wineList.length)];
-
-function hideWord(currentWord)
-
-document.onkeydown = function(event) {
-
-    var userGuess = event.key;
+document.onkeyup = function(event) {
 
     var currentWord = wineList[Math.floor(Math.random() * wineList.length)];
 
     console.log(currentWord); 
 
+    var hiddenWord = [];
 
-    if (letters.indexOf(userGuess) > -1) {
-        for (var i = 0;  i < currentWord.length; i ++) {
-                hiddenWord.push('_');
-                document.getElementById("word-to-guess").innerHTML = hiddenWord.join(' ');  
-            }
+    for (var i = 0; i < currentWord.length; i++) {
+
+        if (currentWord.charAt(i) == ' ') {
             
+            hiddenWord[i] = ' '
         }
+
+        else {
+
+            hiddenWord[i] = "_";
+
+        }
+
     }
+
+    console.log(hiddenWord); 
 }
+
+
+
+
+
+        
