@@ -1,96 +1,113 @@
 
-//Display word with "_ _ _ _" equal to the amount of letters in each word
-//If user guesses letter correctly, their letter is display
-//If user guess incorrectly, letter is displayed  under "letters already guessed"
-//User can't guess same letter twice! 
-//Guesses left: --
-//Once Guesses == 0 or user guesses all word letters 
-//Wins ++ or Losses ++
-//The next word is displayed 
-
-var wins = 0;
-var losses = 0;
-var guessesLeft = 10; 
+var guessesLeft = 9;  
 
 var wineList = 
 ['chardonnay',
 'riesling',
-'pinot grigio',
-'sauvignon blanc',
 'gewuertztraminer',
 'syrah',
-'cabernet sauvignon',
-'zinfandel', 
-'pinot noir',
+'zinfandel',
 'merlot',
 ];
 
+var choices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+                't', 'u', 'v', 'w', 'x', 'y', 'z'];
+                
+
+var alreadyGuessed = [];
 var hiddenWord = [];
+var currentWord; 
+var letter; 
+
+var alreadyGuessedText = document.getElementById('already-guessed');
+var currentWordText = document.getElementById('word-to-guess');
+var guessesLeftCount = document.getElementById('guesses-left'); 
 
 
-function gamePlay() {
+function gameStart() {
 
-    var currentWord = wineList[Math.floor(Math.random() * wineList.length)];
+    currentWord = wineList[Math.floor(Math.random() * wineList.length)];
 
     console.log(currentWord);
     
     for (var i = 0; i < currentWord.length; i++) {
+            
+        hiddenWord.push('_');
 
-        if (currentWord.charAt(i) == ' ') {
-        
-            hiddenWord[i] = ' ';
+    }
+    
+    console.log(hiddenWord); 
 
-        }
+}
 
-        else {
+function gamePlay(letter) {
 
-            hiddenWord[i] = '_';
+    if (currentWord.indexOf(letter) == -1) {
 
-        }
+        guessesLeft--;
+
+        console.log(guessesLeft)
+
+        alreadyGuessed.push(letter);
+
+        console.log(alreadyGuessed);
 
     }
 
-    document.onkeyup = function(event)  {
-
-        var userGuess = event.key;
-
-        var guessesArray = [];
-
-        for (var j = 0; j < currentWord.length; j++) {
-
-            if(userGuess == currentWord.charAt(j)) {
-                    
-                hiddenWord[j] = userGuess; 
-
-            }
-
-            else {
-
-                guessesArray.push(userGuess);
-
-            }
-
-        }
-
-        console.log(guessesArray); 
-
-        console.log(hiddenWord);
+    else {
+        for (var i = 0; i < currentWord.length; i++)
         
-        document.getElementById("word-to-guess").innerHTML = hiddenWord;
+            {
 
-        document.getElementById("already-guessed").innerHTML = guessesArray;
+                hiddenWord.push(letter);
+
+            }
+        
+        console.log(hiddenWord); 
+
     }
 
-};
+}
 
-gamePlay()
+function winOrLoss() {
 
+    if (hiddenWord.indexOf('_') == -1) {
 
+        alert("Winner Winner!");
 
+        resetGame();
+    }
 
-
-
-
-
-
+    else if (guessesLeft == 0) {
         
+        alert("You Lost!")
+
+        resetGame(); 
+    }
+}
+
+function resetGame() {
+
+    guessesLeft = 9; 
+
+    alreadyGuessed = [];
+
+    hiddenword = [];
+
+    gameStart();
+
+}
+
+
+document.onkeyup = function (event) {
+
+    letter = event.key;
+
+    console.log(letter); 
+
+    gamePlay(letter);
+
+}
+
+gameStart(); 
+
