@@ -31,58 +31,62 @@ var hiddenWord = [];
 function gamePlay() {
 
     var currentWord = wineList[Math.floor(Math.random() * wineList.length)];
+
+    console.log(currentWord);
     
-    document.onkeydown = function() {
+    for (var i = 0; i < currentWord.length; i++) {
 
-        console.log(currentWord);
+        if (currentWord.charAt(i) == ' ') {
+        
+            hiddenWord[i] = ' ';
 
-        for (var i = 0; i < currentWord.length; i++) {
+        }
 
-            if (currentWord.charAt(i) == ' ') {
-            
-                hiddenWord[i] = ' ';
+        else {
+
+            hiddenWord[i] = '_';
+
+        }
+
+    }
+
+    document.onkeyup = function(event)  {
+
+        var userGuess = event.key;
+
+        var guessesArray = [];
+
+        for (var j = 0; j < currentWord.length; j++) {
+
+            if(userGuess == currentWord.charAt(j)) {
+                    
+                hiddenWord[j] = userGuess; 
 
             }
 
             else {
 
-                hiddenWord[i] = '_';
+                guessesArray.push(userGuess);
 
             }
 
         }
 
+        console.log(guessesArray); 
+
+        console.log(hiddenWord);
+        
         document.getElementById("word-to-guess").innerHTML = hiddenWord;
+
+        document.getElementById("already-guessed").innerHTML = guessesArray;
     }
-
-        document.onkeyup = function(event)  {
-
-            var userGuess = event.key;
-
-            console.log(userGuess);
-
-            var guessesArray = [];
-
-                for (var j = 0; j < currentWord.length; j++) {
-
-                    if(userGuess == currentWord.charAt(j)) {
-
-                        hiddenWord[j] = userGuess;
-
-                    }
-
-                    console.log(hiddenWord);
-
-                }
-                    
-
-        }
-            
-
 
 };
 
 gamePlay()
+
+
+
 
 
 
