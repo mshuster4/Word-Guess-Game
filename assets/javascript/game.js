@@ -38,6 +38,8 @@ function gameStart() {
     
     console.log(hiddenWord); 
 
+    currentWordText.innerHTML = hiddenWord.join(" ");
+
 }
 
 function gamePlay(letter) {
@@ -46,24 +48,31 @@ function gamePlay(letter) {
 
         guessesLeft--;
 
+        guessesLeftCount.innerHTML = guessesLeft; 
+
         console.log(guessesLeft)
 
         alreadyGuessed.push(letter);
+
+        alreadyGuessedText.innerHTML = alreadyGuessed.join(" ")
 
         console.log(alreadyGuessed);
 
     }
 
     else {
-        for (var i = 0; i < currentWord.length; i++)
-        
-            {
 
-                hiddenWord.push(letter);
+        for (var i = 0; i < currentWord.length; i++)
+
+            if (currentWord[i] == letter) {
+
+                hiddenWord[i] = currentWord[i]; 
 
             }
         
         console.log(hiddenWord); 
+
+        currentWordText.innerHTML = hiddenWord.join(" ");
 
     }
 
@@ -75,15 +84,13 @@ function winOrLoss() {
 
         alert("Winner Winner!");
 
-        resetGame();
     }
 
     else if (guessesLeft == 0) {
         
         alert("You Lost!")
-
-        resetGame(); 
     }
+
 }
 
 function resetGame() {
@@ -94,10 +101,13 @@ function resetGame() {
 
     hiddenword = [];
 
+    currentWord; 
+
     gameStart();
 
 }
 
+gameStart(); 
 
 document.onkeyup = function (event) {
 
@@ -106,8 +116,9 @@ document.onkeyup = function (event) {
     console.log(letter); 
 
     gamePlay(letter);
+    
+    winOrLoss();
 
 }
 
-gameStart(); 
 
