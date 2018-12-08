@@ -1,5 +1,5 @@
 
-var guessesLeft = 9;  
+var guessesLeft = 9;   
 
 var wineList = 
 ['chardonnay',
@@ -20,43 +20,42 @@ var currentWord;
 var letter; 
 
 var alreadyGuessedText = document.getElementById('already-guessed');
-var currentWordText = document.getElementById('word-to-guess');
+var currentWordText = document.getElementById('hidden-word');
 var guessesLeftCount = document.getElementById('guesses-left'); 
 
 
 function gameStart() {
-
-    currentWord = wineList[Math.floor(Math.random() * wineList.length)];
-
-    console.log(currentWord);
     
+    currentWord = wineList[Math.floor(Math.random() * wineList.length)];
+    console.log(currentWord);
+
     for (var i = 0; i < currentWord.length; i++) {
             
         hiddenWord.push('_');
 
     }
     
-    console.log(hiddenWord); 
-
     currentWordText.innerHTML = hiddenWord.join(" ");
 
 }
 
 function gamePlay(letter) {
 
-    if (currentWord.indexOf(letter) == -1) {
+    if (choices.indexOf(letter) == -1) {
+
+        alert("Please pick a letter!");
+    }
+
+    else if (currentWord.indexOf(letter) == -1) {
 
         guessesLeft--;
-
         guessesLeftCount.innerHTML = guessesLeft; 
-
         console.log(guessesLeft)
-
         alreadyGuessed.push(letter);
-
-        alreadyGuessedText.innerHTML = alreadyGuessed.join(" ")
-
+        alreadyGuessedText.innerHTML = alreadyGuessed.join(" ");
         console.log(alreadyGuessed);
+
+        winOrLoss();
 
     }
 
@@ -71,8 +70,8 @@ function gamePlay(letter) {
             }
         
         console.log(hiddenWord); 
-
         currentWordText.innerHTML = hiddenWord.join(" ");
+        winOrLoss(); 
 
     }
 
@@ -80,15 +79,18 @@ function gamePlay(letter) {
 
 function winOrLoss() {
 
-    if (hiddenWord.indexOf('_') == -1) {
+    if (hiddenWord.indexOf('_') == -1) { 
 
         alert("Winner Winner!");
+        resetGame();
 
     }
 
     else if (guessesLeft == 0) {
         
         alert("You Lost!")
+        resetGame();
+
     }
 
 }
@@ -96,29 +98,24 @@ function winOrLoss() {
 function resetGame() {
 
     guessesLeft = 9; 
-
+    guessesLeftCount.innerHTML = guessesLeft; 
     alreadyGuessed = [];
-
-    hiddenword = [];
-
+    hiddenWord = [];
     currentWord; 
+    currentWordText.innerHTML = " ";
 
     gameStart();
 
 }
 
-gameStart(); 
-
 document.onkeyup = function (event) {
 
     letter = event.key;
-
     console.log(letter); 
-
     gamePlay(letter);
-    
-    winOrLoss();
 
 }
+
+gameStart(); 
 
 
