@@ -44,9 +44,13 @@ function gamePlay(letter) {
     if (choices.indexOf(letter) == -1) {
 
         alert("Please pick a letter!");
+
     }
 
+
     else if (currentWord.indexOf(letter) == -1) {
+
+        
 
         guessesLeft--;
         guessesLeftCount.innerHTML = guessesLeft; 
@@ -54,6 +58,7 @@ function gamePlay(letter) {
         alreadyGuessed.push(letter);
         alreadyGuessedText.innerHTML = alreadyGuessed.join(" ");
         console.log(alreadyGuessed);
+
 
         winOrLoss();
 
@@ -71,6 +76,7 @@ function gamePlay(letter) {
         
         console.log(hiddenWord); 
         currentWordText.innerHTML = hiddenWord.join(" ");
+
         winOrLoss(); 
 
     }
@@ -103,6 +109,7 @@ function resetGame() {
     hiddenWord = [];
     currentWord; 
     currentWordText.innerHTML = " ";
+    alreadyGuessedText.innerHTML = " "; 
 
     gameStart();
 
@@ -111,7 +118,7 @@ function resetGame() {
 document.onkeyup = function (event) {
 
     letter = event.key;
-    console.log(letter); 
+    console.log(letter);   
     gamePlay(letter);
 
 }
