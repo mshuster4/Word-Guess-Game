@@ -1,5 +1,6 @@
 
-var guessesLeft = 9;   
+var guessesLeft = 9;
+var wins = 0;    
 
 var wineList = 
 ['chardonnay',
@@ -22,7 +23,7 @@ var letter;
 var alreadyGuessedText = document.getElementById('already-guessed');
 var currentWordText = document.getElementById('hidden-word');
 var guessesLeftCount = document.getElementById('guesses-left'); 
-
+var winsCount = document.getElementById('wins'); 
 
 function gameStart() {
     
@@ -88,6 +89,8 @@ function winOrLoss() {
     if (hiddenWord.indexOf('_') == -1) { 
 
         alert("Winner Winner!");
+        wins++;
+        winsCount.innerHTML = wins; 
         resetGame();
 
     }
