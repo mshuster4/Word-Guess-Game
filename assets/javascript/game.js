@@ -47,11 +47,9 @@ function gamePlay(letter) {
         alert("Please pick a letter!");
 
     }
+ 
 
-
-    else if (currentWord.indexOf(letter) == -1) {
-
-        
+    else if (currentWord.indexOf(letter) == -1 && alreadyGuessed.indexOf(letter) == -1) {
 
         guessesLeft--;
         guessesLeftCount.innerHTML = guessesLeft; 
